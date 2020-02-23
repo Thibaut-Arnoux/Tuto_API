@@ -2,6 +2,13 @@
 
 [Tutoriel](https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb) : https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb
 
+## Node Modules
+
+- Nodemon
+- Express
+- body-parser
+
+
 ## Partie 1
 
 - Création de l'environnement de développement
