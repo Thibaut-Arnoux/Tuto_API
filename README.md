@@ -6,7 +6,8 @@
 
 - Nodemon
 - Express
-- body-parser
+- Body-parser
+- Mongoose
 
 
 ## Partie 1
@@ -29,3 +30,12 @@ TODO
 ## Partie 4
 
 TODO
+
+## Note
+
+- L'opérateur spread ... est utilisé pour faire une copie de tous les éléments de req.body
+- res => res.json()  
+      <=> 
+function(res){
+    return res.json();
+}
