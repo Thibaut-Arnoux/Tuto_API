@@ -40,6 +40,25 @@ app.post('/api/stuff', (req, res, next) => {
         }));
 });
 
+app.put('/api/stuff/:id', (req, res, next) => {
+    Thing.updateOne({ _id : req.params.id}, {
+        _id : req.params.id,
+        title : req.body.title,
+        descriptions : req.body.descriptions,
+        price : req.body.price,
+        imageUrl : req.body.imageUrl,
+        userId : req.body.userId,
+    })
+    .then(() => res.status(200).json({ message : 'Objet modifié !'}))
+    .catch(error => res.status(400).json({error}));
+});
+
+app.delete('/api/stuff/:id', (req, res, next) => {
+    Thing.deleteOne({_id : req.params.id})
+    .then(thing => res.status(200).json({ message : 'Objet supprimé !'}))
+    .catch(error => res.status(400).json({ error }));
+});
+
 app.get('/api/stuff/:id', (req, res, next) => {
     Thing.findOne({ _id : req.params.id })
     .then(thing => res.status(200).json(thing))
