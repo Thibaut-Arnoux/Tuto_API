@@ -2,6 +2,14 @@
 
 [Tutoriel](https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb) : https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb
 
+## Node Modules
+
+- Nodemon
+- Express
+- Body-parser
+- Mongoose
+
+
 ## Partie 1
 
 - Création de l'environnement de développement
@@ -22,3 +30,12 @@ TODO
 ## Partie 4
 
 TODO
+
+## Note
+
+- L'opérateur spread ... est utilisé pour faire une copie de tous les éléments de req.body
+- res => res.json()  
+      <=> 
+function(res){
+    return res.json();
+}
