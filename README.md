@@ -21,7 +21,10 @@
 
 ## Partie 2
 
-WIP
+- Utilisation de Mongoose pour la création de la base de données
+- Stockage de la base de données sur MongoDB Atlas
+- Création des routes CRUD
+- Réalisation du quick n°2
 
 ## Partie 3
 
@@ -35,7 +38,9 @@ TODO
 
 - L'opérateur spread ... est utilisé pour faire une copie de tous les éléments de req.body
 - res => res.json()  
-      <=> 
-function(res){
-    return res.json();
-}
+      <=>  
+function(res){  
+    return res.json();  
+}  
+- Update synthaxe
+- Schéma de plusieurs objets avec MongoDB
