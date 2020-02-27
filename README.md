@@ -8,6 +8,9 @@
 - Express
 - Body-parser
 - Mongoose
+- mongoose-unique-validator
+- bcrypt
+- jsonwebtoken
 
 
 ## Partie 1
