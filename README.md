@@ -31,7 +31,9 @@
 
 ## Partie 3
 
-TODO
+- Création des Utilisateurs
+- Utilisation des JWT
+- Cryptage des Password
 
 ## Partie 4
 
@@ -43,7 +45,7 @@ TODO
 - res => res.json()  
       <=>  
 function(res){  
-    return res.json();  
+      return res.json();  
 }  
 - Update synthaxe
 - Schéma de plusieurs objets avec MongoDB
