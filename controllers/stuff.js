@@ -1,9 +1,12 @@
 const Thing = require('../models/Thing');
+const fs = require('fs');
 
 exports.createThing = (req, res, next) => {
-    delete req.body._id;
+    const thingObject = JSON.parse(req.body.thing);
+    delete thingObject._id;
     const thing = new Thing({
-        ...req.body
+        ...thingObject,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
 
     thing.save()
@@ -16,22 +19,45 @@ exports.createThing = (req, res, next) => {
 };
 
 exports.modifyThing = (req, res, next) => {
-    Thing.updateOne({ _id : req.params.id}, {
+    if(req.file){
+        Thing.findOne({ _id : req.params.id})
+        .then(thing => {
+            const filename = thing.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, (err) => {
+                if (err) throw err;
+            });
+        })
+        .catch( error => res.status(500).json({ error }));
+    }
+    
+    const thingObject = req.file ? 
+    { 
+        ...JSON.parse(req.body.thing),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body};
+    Thing.updateOne({ _id : req.params.id}, {   
         _id : req.params.id,
-        title : req.body.title,
-        descriptions : req.body.descriptions,
-        price : req.body.price,
-        imageUrl : req.body.imageUrl,
-        userId : req.body.userId,
+        title : thingObject.title,
+        descriptions : thingObject.descriptions,
+        price : thingObject.price,
+        imageUrl : thingObject.imageUrl,
+        userId : thingObject.userId,
     })
     .then(() => res.status(200).json({ message : 'Objet modifié !'}))
     .catch(error => res.status(400).json({error}));
 };
 
 exports.deleteThing = (req, res, next) => {
-    Thing.deleteOne({_id : req.params.id})
-    .then(thing => res.status(200).json({ message : 'Objet supprimé !'}))
-    .catch(error => res.status(400).json({ error }));
+    Thing.findOne({ _id : req.params.id})
+    .then(thing => {
+        const filename = thing.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () => {
+            Thing.deleteOne({_id : req.params.id})
+            .then(thing => res.status(200).json({ message : 'Objet supprimé !'}))
+            .catch(error => res.status(400).json({ error }));
+        });
+    })
+    .catch( error => res.status(500).json({ error }));
 };
 
 exports.getOneThing = (req, res, next) => {
